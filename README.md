@@ -33,7 +33,7 @@ We recommend you have this hardware configuration to run a node:
 
 - a modern multi-core CPU with good single-core performance
 - at least 16 GB RAM (32 GB recommended)
-- a high performance SSD drive with at least 4 TB free (NVME recommended)
+- a high performance SSD drive (NVME recommended) with at least 750GB (full node) or 4.5TB (archive node) free
 
 ### Troubleshooting
 
@@ -44,11 +44,10 @@ If you encounter problems with your node, please open a [GitHub issue](https://g
 
 ### Supported networks
 
-| Ethereum Network | Status |
-|------------------| ------ |
-| Goerli testnet   | ✅     |
-| Sepolia testnet  | ✅     |
-| Mainnet          | ✅     |
+| Base Network      | Status |
+|-------------------| ------ |
+| Testnet (Sepolia) | ✅     |
+| Mainnet           | ✅     |
 
 ### Usage
 
@@ -69,7 +68,6 @@ curl -d '{"id":0,"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["late
 
 Note: Some L1 nodes (e.g. Erigon) do not support fetching storage proofs. You can work around this by specifying `--l1.trustrpc` when starting op-node (add it in `op-node-entrypoint` and rebuild the docker image with `docker compose build`.) Do not do this unless you fully trust the L1 node provider.
 
-
 #### Persisting Data
 
 By default, the data directory is stored in `${PROJECT_ROOT}/geth-data`. You can override this by modifying the value of
@@ -84,6 +82,7 @@ This is useful for running the node in a Kubernetes cluster, for example.
 
 Note that you'll need to override some of the default configuration that assumes a multi-container environment (`OP_NODE_L2_ENGINE_RPC`) and any port conflicts (`OP_NODE_RPC_PORT`).
 Example:
+
 ```
 docker run --env-file .env.sepolia -e OP_NODE_L2_ENGINE_RPC=ws://localhost:8551 -e OP_NODE_RPC_PORT=7545 ghcr.io/base-org/node:latest
 ```
@@ -106,7 +105,7 @@ $( curl -s -d '{"id":0,"jsonrpc":"2.0","method":"optimism_syncStatus"}' -H "Cont
 
 ## Disclaimer
 
-We’re excited for you to build on Base 🔵 — but we want to make sure that you understand the nature of the the node software and smart contracts offered here.
+We’re excited for you to build on Base 🔵 — but we want to make sure that you understand the nature of the node software and smart contracts offered here.
 
 THE NODE SOFTWARE AND SMART CONTRACTS CONTAINED HEREIN ARE FURNISHED AS IS, WHERE IS, WITH ALL FAULTS AND WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING ANY WARRANTY OF MERCHANTABILITY, NON- INFRINGEMENT, OR FITNESS FOR ANY PARTICULAR PURPOSE. IN PARTICULAR, THERE IS NO REPRESENTATION OR WARRANTY THAT THE NODE SOFTWARE AND SMART CONTRACTS WILL PROTECT YOUR ASSETS — OR THE ASSETS OF THE USERS OF YOUR APPLICATION — FROM THEFT, HACKING, CYBER ATTACK, OR OTHER FORM OF LOSS OR DEVALUATION.
 
